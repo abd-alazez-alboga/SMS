@@ -6,6 +6,7 @@ use App\Http\Controllers\TripController;
 use App\Http\Controllers\NewsfeedController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\OTPController;
+use App\Http\Controllers\SmsController;
 
 // public routes
 Route::post('/register', [AuthController::class, 'register']);
@@ -46,3 +47,8 @@ Route::middleware(['auth:sanctum', 'is_admin'])->group(function () {
     Route::put('/bookings/{id}', [BookingController::class, 'update']);
     Route::delete('/bookings/{id}', [BookingController::class, 'destroy']);
 });
+
+
+
+///////////////////////////
+Route::post('/send-sms', [SmsController::class, 'sendOTP']);
