@@ -41,7 +41,7 @@ class AuthController extends Controller
     }
     // Login user
     public function login(Request $request)
-    {2
+    {
         // Validate fields
         $validated = $request->validate([
             'phone_number' => 'required|string',
