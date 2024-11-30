@@ -17,7 +17,7 @@ class User extends Authenticatable
         'phone_number',
         'location',
         'password',
-        'otp_code',
+        // 'otp_code',
         'expire_at',
         'role',
     ];

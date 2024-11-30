@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Newsfeed;
+use App\Models\User;
+use App\Notifications\NewNewsfeedNotification;
 use Illuminate\Http\Request;
 
 class NewsfeedController extends Controller
@@ -32,7 +34,11 @@ class NewsfeedController extends Controller
         ]);
 
         $newsfeed = Newsfeed::create($validated);
-
+        // Notify all users
+        $users = User::all();
+        foreach ($users as $user) {
+            $user->notify(new NewNewsfeedNotification($newsfeed));
+        }
         return response()->json($newsfeed, 201);
     }
 

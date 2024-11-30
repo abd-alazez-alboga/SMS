@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Trip;
+use App\Models\User;
+use App\Notifications\NewTripNotification;
 use Illuminate\Http\Request;
 
 class TripController extends Controller
@@ -29,18 +31,20 @@ class TripController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'pickup_location' => 'required|string|max:255',
-            'destination' => 'required|string|max:255',
+            'pickup_location_ar' => 'required|string|max:255',
+            'destination_ar' => 'required|string|max:255',
+            'pickup_location_en' => 'required|string|max:255',
+            'destination_en' => 'required|string|max:255',
             'images' => 'required|array',
             'images.*' => 'string',
             'description_en' => 'required|string',
             'description_ar' => 'required|string',
-            'price' => 'required|integer|min:0',
-            'is_passport_required' => 'required|boolean',
+            'price' => 'required|integer|min:0'
         ]);
 
-        $trip = Trip::create($validated);
 
+        $trip = Trip::create($validated);
+        
         return response()->json($trip, 201);
     }
 
@@ -55,15 +59,17 @@ class TripController extends Controller
         }
 
         $validated = $request->validate([
-            'pickup_location' => 'sometimes|required|string|max:255',
-            'destination' => 'sometimes|required|string|max:255',
-            'images' => 'sometimes|required|array',
+            'pickup_location_ar' => 'required|string|max:255',
+            'destination_ar' => 'required|string|max:255',
+            'pickup_location_en' => 'required|string|max:255',
+            'destination_en' => 'required|string|max:255',
+            'images' => 'required|array',
             'images.*' => 'string',
-            'description_en' => 'sometimes|required|string',
-            'description_ar' => 'sometimes|required|string',
-            'price' => 'sometimes|required|integer|min:0',
-            'is_passport_required' => 'sometimes|required|boolean',
+            'description_en' => 'required|string',
+            'description_ar' => 'required|string',
+            'price' => 'required|integer|min:0'
         ]);
+
 
         $trip->update($validated);
 

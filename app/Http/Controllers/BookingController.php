@@ -27,28 +27,42 @@ class BookingController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
+            'user_id' => 'required|exists:users,id',
             'trip_id' => 'required|exists:trips,id',
+            'pickup_location' => 'required|string',
+            'destination' => 'required|string',
+            'number_of_passengers' => 'required|integer|min:1',
+            'number_of_bags_of_wieght_10' => 'required|integer',
+            'number_of_bags_of_wieght_23' => 'required|integer',
+            'number_of_bags_of_wieght_30' => 'required|integer',
             'date' => 'required|date',
             'vehicle' => 'required|in:car,van,both',
-            'number_of_passengers' => 'required|integer|min:1',
-            'number_of_bags' => 'required|integer|min:1',
-            'names' => 'required|array',
-            'names.*' => 'required|string',
-            'passport_photos' => 'required|array',
-            'passport_photos.*' => 'string',
-            'id_photos' => 'required|array',
-            'id_photos.*' => 'string',
-            'status' => 'required|in:pending,confirmed,cancelled,completed',
+            'name' => 'required|string',
+            'entry_requirement' => 'in:Visa,Foreign Passport,Residency,eVisa',
+            'passport_photo' => 'required|string',
+            'ticket_photo' => 'required|string'
         ]);
 
-        // Ensure the number of names matches the number of passengers
-        if (count($validated['names']) !== (int)$validated['number_of_passengers']) {
-            return response()->json(['message' => 'The number of names must match the number of passengers.'], 422);
-        }
 
         $validated['user_id'] = Auth::id();
 
-        $booking = Booking::create($validated);
+        $booking = Booking::create([
+            'user_id' => $validated['user_id'],
+            'trip_id' => $validated['trip_id'],
+            'pickup_location' => $validated['pickup_location'],
+            'destination' => $validated['destination'],
+            'number_of_passengers' => $validated['number_of_passengers'],
+            'number_of_bags_of_wieght_10' => $validated['number_of_bags_of_wieght_10'],
+            'number_of_bags_of_wieght_23' => $validated['number_of_bags_of_wieght_23'],
+            'number_of_bags_of_wieght_30' => $validated['number_of_bags_of_wieght_30'],
+            'date' => $validated['date'],
+            'vehicle' => $validated['vehicle'],
+            'name' => $validated['name'],
+            'entry_requirement' => $validated['entry_requirement'],
+            'passport_photo' => $validated['passport_photo'],
+            'ticket_photo' => $validated['ticket_photo'],
+            'status' => 'pending',
+        ]);
 
         return response()->json($booking, 201);
     }

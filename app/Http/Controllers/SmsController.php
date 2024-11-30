@@ -17,12 +17,12 @@ class SmsController extends Controller
 
 
     public function sendSms(Request $request)
-    { 
+    {
         $request->validate([
             'msg' => 'required|string',
             'to' => 'required|string|regex:/^09[0-9]{8}$/',
         ]);
-        
+
         $response = $this->bmsService->sendSms(
             $request->input('msg'),
             $request->input('to'),
@@ -33,20 +33,19 @@ class SmsController extends Controller
 
     public function sendOTP(Request $request)
     {
-        $otp = 3123321; 
-        $otpString = strval($otp); 
-    
-        $message = "Your OTP is " . $otpString;
-    
-     
+        $otp = 3123321;
+        $otpString = strval($otp);
+
+        // $message = "Your OTP is " . $otpString;
+        $message = "نحنا لعيبة خالو";
+
         $request->validate([
             'to' => 'required|string|regex:/^09[0-9]{8}$/',
         ]);
-        
-      
+
+
         $response = $this->bmsService->sendSms($message, $request->input('to'));
-    
+
         return response()->json($response);
     }
-
 }

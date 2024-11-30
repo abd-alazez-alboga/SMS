@@ -14,8 +14,8 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::post('/send-otp', [OTPController::class, 'sendOTP']);
 Route::post('/verify-otp', [OTPController::class, 'verifyOTP']);
 
-// protected routes for regular users
-Route::middleware(['auth:sanctum', 'two_factor'])->group(function () {
+// protected routes for regular users, 'two_factor' middleware will be applied
+Route::middleware(['auth:sanctum'])->group(function () {
     // logout
     Route::post('/logout', [AuthController::class, 'logout']);
     // user details

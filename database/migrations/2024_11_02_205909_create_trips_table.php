@@ -8,18 +8,20 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
+     *
      */
     public function up(): void
     {
         Schema::create('trips', function (Blueprint $table) {
             $table->id();
-            $table->string('pickup_location');
-            $table->string('destination');
+            $table->string('pickup_location_ar');
+            $table->string('destination_ar');
+            $table->string('pickup_location_en');
+            $table->string('destination_en');
             $table->json('images');
             $table->text('description_en');
             $table->text('description_ar');
             $table->unsignedInteger('price');
-            $table->boolean('is_passport_required');
             $table->timestamps();
         });
     }

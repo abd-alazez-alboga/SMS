@@ -9,23 +9,27 @@ class Booking extends Model
     protected $fillable = [
         'user_id',
         'trip_id',
+        'pickup_location',
+        'destination',
+        'number_of_passengers',
+        'number_of_bags_of_wieght_10',
+        'number_of_bags_of_wieght_23',
+        'number_of_bags_of_wieght_30',
         'date',
         'vehicle',
-        'number_of_passengers',
-        'number_of_bags',
-        'names',
-        'passport_photos',
-        'id_photos',
-        'status',
+        'name',
+        'entry_requirement',
+        'passport_photo',
+        'ticket_photo',
+        'status'
     ];
 
     protected $casts = [
         'date' => 'date',
-        'names' => 'array',
-        'passport_photos' => 'array',
-        'id_photos' => 'array',
         'number_of_passengers' => 'integer',
-        'number_of_bags' => 'integer',
+        'number_of_bags_of_wieght_10' => 'integer',
+        'number_of_bags_of_wieght_23' => 'integer',
+        'number_of_bags_of_wieght_30' => 'integer',
     ];
 
     // Relationships

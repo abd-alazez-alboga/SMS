@@ -17,6 +17,7 @@ class OTPService
         $this->username = env('BMS_USER_NAME');
         $this->password = env('BMS_PASSWORD');
     }
+
     public function sendOTP($phoneNumber, $otpCode)
     {
         $message = "رمز التحقق الخاص بك هو {$otpCode}.\nيرجى استخدام هذا الرمز لإكمال عملية التحقق.\nلا تقم بمشاركة هذا الرمز مع أي شخص آخر.\nإذا لم تطلب هذا الرمز، يرجى تجاهل هذه الرسالة.";

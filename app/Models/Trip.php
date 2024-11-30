@@ -7,19 +7,19 @@ use Illuminate\Database\Eloquent\Model;
 class Trip extends Model
 {
     protected $fillable = [
-        'pickup_location',
-        'destination',
+        'pickup_location_ar',
+        'destination_ar',
+        'pickup_location_en',
+        'destination_en',
         'images',
         'description_en',
         'description_ar',
-        'price',
-        'is_passport_required',
+        'price'
     ];
 
     protected $casts = [
         'images' => 'array',
-        'price' => 'integer',
-        'is_passport_required' => 'boolean',
+        'price' => 'integer'
     ];
 
     public function bookings()
