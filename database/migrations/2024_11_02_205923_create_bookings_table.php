@@ -12,8 +12,6 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('trip_id')->constrained()->onDelete('cascade');
-            $table->string('pickup_location');
-            $table->string('destination');
             $table->unsignedInteger('number_of_passengers');
             $table->unsignedInteger('number_of_bags_of_wieght_10');
             $table->unsignedInteger('number_of_bags_of_wieght_23');

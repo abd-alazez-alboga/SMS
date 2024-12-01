@@ -29,8 +29,6 @@ class BookingController extends Controller
         $validated = $request->validate([
             'user_id' => 'required|exists:users,id',
             'trip_id' => 'required|exists:trips,id',
-            'pickup_location' => 'required|string',
-            'destination' => 'required|string',
             'number_of_passengers' => 'required|integer|min:1',
             'number_of_bags_of_wieght_10' => 'required|integer',
             'number_of_bags_of_wieght_23' => 'required|integer',
@@ -49,8 +47,6 @@ class BookingController extends Controller
         $booking = Booking::create([
             'user_id' => $validated['user_id'],
             'trip_id' => $validated['trip_id'],
-            'pickup_location' => $validated['pickup_location'],
-            'destination' => $validated['destination'],
             'number_of_passengers' => $validated['number_of_passengers'],
             'number_of_bags_of_wieght_10' => $validated['number_of_bags_of_wieght_10'],
             'number_of_bags_of_wieght_23' => $validated['number_of_bags_of_wieght_23'],
@@ -100,25 +96,21 @@ class BookingController extends Controller
         }
 
         $validated = $request->validate([
-            'trip_id' => 'sometimes|required|exists:trips,id',
-            'date' => 'sometimes|required|date',
-            'vehicle' => 'sometimes|required|in:car,van,both',
-            'number_of_passengers' => 'sometimes|required|integer|min:1',
-            'number_of_bags' => 'required|integer|min:1',
-            'names' => 'sometimes|required|array',
-            'names.*' => 'required|string',
-            'passport_photos' => 'sometimes|required|array',
-            'passport_photos.*' => 'string',
-            'id_photos' => 'sometimes|required|array',
-            'id_photos.*' => 'string',
-            'status' => 'sometimes|required|in:pending,confirmed,cancelled,completed',
+            'user_id' => 'required|exists:users,id',
+            'trip_id' => 'required|exists:trips,id',
+            'number_of_passengers' => 'required|integer|min:1',
+            'number_of_bags_of_wieght_10' => 'required|integer',
+            'number_of_bags_of_wieght_23' => 'required|integer',
+            'number_of_bags_of_wieght_30' => 'required|integer',
+            'date' => 'required|date',
+            'vehicle' => 'required|in:car,van,both',
+            'name' => 'required|string',
+            'entry_requirement' => 'in:Visa,Foreign Passport,Residency,eVisa',
+            'passport_photo' => 'required|string',
+            'ticket_photo' => 'required|string',
+            'status' => 'required|in:pending,confirmed,cancelled,completed',
         ]);
 
-        if (isset($validated['number_of_passengers']) && isset($validated['names'])) {
-            if (count($validated['names']) !== (int)$validated['number_of_passengers']) {
-                return response()->json(['message' => 'The number of names must match the number of passengers.'], 422);
-            }
-        }
 
         $booking->update($validated);
 
