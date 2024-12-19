@@ -17,11 +17,11 @@ return new class extends Migration
             $table->unsignedInteger('number_of_bags_of_wieght_23');
             $table->unsignedInteger('number_of_bags_of_wieght_30');
             $table->date('date');
-            $table->enum('vehicle', ['car', 'van', 'both']);
+            $table->enum('vehicle', ['Car', 'Van', 'Car or Van']);
             $table->string('name');
-            $table->enum('entry_requirement', ['Visa', 'Foreign Passport', 'Residency', 'eVisa']);
-            $table->string('passport_photo');
-            $table->string('ticket_photo');
+            $table->enum('entry_requirement', ['Visa', 'Foreign Passport', 'Residency', 'E-Visa']);
+            $table->longText('passport_photo');
+            $table->longText('ticket_photo');
             $table->enum('status', ['pending', 'confirmed', 'cancelled', 'completed'])->default('pending');
             $table->timestamps();
         });

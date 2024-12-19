@@ -29,7 +29,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     // booking
     Route::get('/bookings', [BookingController::class, 'index']);
     Route::get('/bookings/{id}', [BookingController::class, 'show']);
-    Route::post('/bookings', [BookingController::class, 'store']);
+    Route::post('/book', [BookingController::class, 'store']);
 });
 
 // ---------------------------------------- Admin Routes ----------------------------------------

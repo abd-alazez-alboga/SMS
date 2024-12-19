@@ -34,9 +34,9 @@ class BookingController extends Controller
             'number_of_bags_of_wieght_23' => 'required|integer',
             'number_of_bags_of_wieght_30' => 'required|integer',
             'date' => 'required|date',
-            'vehicle' => 'required|in:car,van,both',
+            'vehicle' => 'required|in:Car,Van,Car or Van',
             'name' => 'required|string',
-            'entry_requirement' => 'in:Visa,Foreign Passport,Residency,eVisa',
+            'entry_requirement' => 'in:Visa,Foreign Passport,Residency,E-Visa',
             'passport_photo' => 'required|string',
             'ticket_photo' => 'required|string'
         ]);
@@ -103,9 +103,9 @@ class BookingController extends Controller
             'number_of_bags_of_wieght_23' => 'required|integer',
             'number_of_bags_of_wieght_30' => 'required|integer',
             'date' => 'required|date',
-            'vehicle' => 'required|in:car,van,both',
+            'vehicle' => 'required|in:Car,Van,Car or Van',
             'name' => 'required|string',
-            'entry_requirement' => 'in:Visa,Foreign Passport,Residency,eVisa',
+            'entry_requirement' => 'in:Visa,Foreign Passport,Residency,E-Visa',
             'passport_photo' => 'required|string',
             'ticket_photo' => 'required|string',
             'status' => 'required|in:pending,confirmed,cancelled,completed',
